@@ -124,6 +124,7 @@ interface StateChartProps {
   className: string;
   machine: StateNode<any> | string;
   height?: number | string;
+  hideSideBar?: boolean;
 }
 
 interface StateChartState {
@@ -219,10 +220,13 @@ export class StateChart extends React.Component<
       })
     };
   })();
+
   svgRef = React.createRef<SVGSVGElement>();
+  
   componentDidMount() {
     this.state.service.start();
   }
+  
   renderView() {
     const { view, current, machine, code } = this.state;
 
@@ -289,6 +293,7 @@ export class StateChart extends React.Component<
         return null;
     }
   }
+
   updateMachine(code: string) {
     let machine: StateNode;
 
@@ -304,6 +309,7 @@ export class StateChart extends React.Component<
 
     this.reset(code, machine);
   }
+
   reset(code = this.state.code, machine = this.state.machine) {
     this.state.service.stop();
     this.setState(
@@ -336,6 +342,7 @@ export class StateChart extends React.Component<
       }
     );
   }
+
   render() {
     const { current, preview, previewEvent, machine, code } = this.state;
 
@@ -481,7 +488,8 @@ export class StateChart extends React.Component<
             })}
           </svg>
         </StyledVisualization>
-        <StyledSidebar>
+
+        {!hideSidebar && <StyledSidebar>
           <StyledViewTabs>
             {['definition', 'state'].map(view => {
               return (
@@ -496,7 +504,7 @@ export class StateChart extends React.Component<
             })}
           </StyledViewTabs>
           <StyledView>{this.renderView()}</StyledView>
-        </StyledSidebar>
+        </StyledSidebar>}
       </StyledStateChart>
     );
   }
