@@ -7,7 +7,7 @@
     "start": "cd public/src && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "examples": "tsc && ncp lib examples/src/lib && cd examples && npm start",
-    "prepublish": "tsc",
+    "prepublish": "tsc --build tsconfig.json",
     "develop": "concurrently \"tsc -w\" \"cd public && npm start\"",
     "deploy": "cd public && npm run deploy"
   },
