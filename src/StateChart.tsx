@@ -124,7 +124,7 @@ interface StateChartProps {
   className: string;
   machine: StateNode<any> | string;
   height?: number | string;
-  hideSideBar?: boolean;
+  hideSidebar?: boolean;
 }
 
 interface StateChartState {
@@ -489,7 +489,7 @@ export class StateChart extends React.Component<
           </svg>
         </StyledVisualization>
 
-        {!hideSidebar && <StyledSidebar>
+        {!this.props.hideSidebar && <StyledSidebar>
           <StyledViewTabs>
             {['definition', 'state'].map(view => {
               return (
